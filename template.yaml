@@ -1,0 +1,78 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  soc-incident-when-tag-applied
+
+  Whenever certain tags are applied to an S3 bucket, this SAM project
+  creates incidents for SOC to investigate.
+
+Parameters:
+  CrossAccountRole:
+    Type: String
+    Description:
+      The role to assume in other organisation accounts. Must be SCP-exempt and give
+      full admin rights. Use AWSControlTowerExecution under CT, OrganizationAccountAccessRole
+      under AWS Organizations. Make sure this role exists also in the Organization account
+      and can be assumed only from there. Define it manually if necessary.
+    AllowedValues: ['AWSControlTowerExecution', 'OrganizationAccountAccessRole']
+    Default: 'AWSControlTowerExecution'
+
+  CustomEventBusName:
+    Type: String
+    Description: The custom event bus to listen to for the events
+    Default: security-hub-automation
+
+  RequestPubliclyAccessibleTags:
+    Type: String
+    Description: The tags used for requesting a publicly readable and/or writable S3 bucket
+    Default: 'soar:s3:request-publicly-readable,soar:s3:request-publicly-writable'
+
+  CompanyName:
+    Type: String
+    Description: The CompanyName for the ASFF finding created
+    Default: Delegat SOAR Public S3 Alarms
+
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: python3.9
+
+Resources:
+  S3TagAppliedFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3_tag_applied_function
+      Handler: s3_tag_applied/app.lambda_handler
+      Events:
+        S3PutBucketTagging:
+          Type: EventBridgeRule
+          Properties:
+            EventBusName: !Ref CustomEventBusName
+            Pattern:
+              source:
+                - aws.s3
+              detail-type:
+                - AWS API Call via CloudTrail
+              detail:
+                eventSource: 
+                  - s3.amazonaws.com
+                eventName: 
+                  - PutBucketTagging
+      Policies:
+        - Statement:
+            - Sid: AssumeTheRole
+              Effect: Allow
+              Action:
+                - sts:AssumeRole
+              Resource: !Sub 'arn:aws:iam::*:role/${CrossAccountRole}'
+            - Sid: SecHubPermissions
+              Effect: Allow
+              Action:
+                - securityhub:BatchImportFindings
+              Resource: '*'
+      Environment:
+        Variables:
+          TAGS: !Ref RequestPubliclyAccessibleTags
+          COMPANY_NAME: !Ref CompanyName
+          CROSS_ACCOUNT_ROLE: !Ref CrossAccountRole
+

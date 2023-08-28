@@ -1,0 +1,17 @@
+# Deployment configuration
+
+repo-name    = "SOAR-soc-incident-when-s3-tag-applied"
+part-of      = 'soar'
+
+
+[SAM]
+profile      = 'admin-account'
+regions      = '{all-regions}'
+stack-name   = "INFRA-soc-incident-when-s3-tag-applied"
+
+[[post-SAM-CloudFormation]]
+name         = "INFRA-detect-bucket-tagging"
+template     = 'cloudformation/detect-bucket-tagging.yaml'
+account      = 'ALL'
+regions      = '{all-regions}'
+
