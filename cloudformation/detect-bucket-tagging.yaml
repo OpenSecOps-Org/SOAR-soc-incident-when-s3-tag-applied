@@ -14,7 +14,7 @@ Parameters:
   CustomEventBusName:
     Type: String
     Description: The name of the custom event bus
-    Default: security-hub-automation
+    Default: SOAR-events
 
 
 Resources:
@@ -22,7 +22,7 @@ Resources:
   S3PutBucketTaggingRule:
     Type: "AWS::Events::Rule"
     Properties:
-      Description: Send all S3 PutBucketTagging events to the custom event bus security-hub-automation in the organisation account
+      Description: Send all S3 PutBucketTagging events to the custom event bus SOAR-events in the organisation account
       State: ENABLED
       EventPattern:
         source:

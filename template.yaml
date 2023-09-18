@@ -20,7 +20,7 @@ Parameters:
   CustomEventBusName:
     Type: String
     Description: The custom event bus to listen to for the events
-    Default: security-hub-automation
+    Default: SOAR-events
 
   RequestPubliclyAccessibleTags:
     Type: String
@@ -35,7 +35,7 @@ Parameters:
 Globals:
   Function:
     Timeout: 30
-    Runtime: python3.9
+    Runtime: python3.11
 
 Resources:
   S3TagAppliedFunction:
