@@ -30,7 +30,7 @@ Parameters:
   CompanyName:
     Type: String
     Description: The CompanyName for the ASFF finding created
-    Default: Delegat SOAR Public S3 Alarms
+    Default: OpenSecOps SOAR Public S3 Alarms
 
 Globals:
   Function:
