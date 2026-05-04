@@ -1,0 +1,4 @@
+component_name = "SOAR-soc-incident-when-s3-tag-applied"
+converted = true
+converted_in = "v1.1.0"
+acknowledged_cves = []

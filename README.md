@@ -1,5 +1,7 @@
 # soc-incident-when-tag-applied
 
+[![Daily CVE scan](https://github.com/OpenSecOps-Org/SOAR-soc-incident-when-s3-tag-applied/actions/workflows/daily-scan.yml/badge.svg)](https://github.com/OpenSecOps-Org/SOAR-soc-incident-when-s3-tag-applied/actions/workflows/daily-scan.yml) [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/OpenSecOps-Org/SOAR-soc-incident-when-s3-tag-applied/badge)](https://scorecard.dev/viewer/?uri=github.com/OpenSecOps-Org/SOAR-soc-incident-when-s3-tag-applied)
+
 Whenever certain tags are applied to an S3 bucket, this SAM project
 creates incidents for SOC to investigate. The implementation is based
 on all member accounts passing the PutBucketTagging event to the custom
