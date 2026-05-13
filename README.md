@@ -1,6 +1,6 @@
 # soc-incident-when-tag-applied
 
-[![Daily CVE scan](https://github.com/OpenSecOps-Org/SOAR-soc-incident-when-s3-tag-applied/actions/workflows/daily-scan.yml/badge.svg)](https://github.com/OpenSecOps-Org/SOAR-soc-incident-when-s3-tag-applied/actions/workflows/daily-scan.yml) [![OpenSSF Scorecard](https://github.com/OpenSecOps-Org/SOAR-soc-incident-when-s3-tag-applied/actions/workflows/scorecard.yml/badge.svg)](https://github.com/OpenSecOps-Org/SOAR-soc-incident-when-s3-tag-applied/actions/workflows/scorecard.yml)
+[![Daily CVE scan](https://github.com/OpenSecOps-Org/SOAR-soc-incident-when-s3-tag-applied/actions/workflows/daily-scan.yml/badge.svg)](https://github.com/OpenSecOps-Org/SOAR-soc-incident-when-s3-tag-applied/actions/workflows/daily-scan.yml) [![OpenSSF Scorecard](https://github.com/OpenSecOps-Org/SOAR-soc-incident-when-s3-tag-applied/actions/workflows/scorecard.yml/badge.svg)](https://github.com/OpenSecOps-Org/SOAR-soc-incident-when-s3-tag-applied/actions/workflows/scorecard.yml) [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/12827/badge)](https://www.bestpractices.dev/projects/12827)
 
 Whenever certain tags are applied to an S3 bucket, this SAM project
 creates incidents for SOC to investigate. The implementation is based
